@@ -63,6 +63,8 @@
 .nd-mt__cnt.warn{color:#9A3B2E}
 .nd-mt__note{font-size:13.5px;color:#9A3B2E;background:#F8EFEA;border-radius:4px;padding:9px 12px}
 .nd-mt__hide{display:none !important}
+.nd-mt__priv{font-size:12.5px;color:#A99F97;margin-top:-6px !important}
+.nd-mt__notice{font-size:13.5px;color:#6B625C;line-height:1.75;border-top:1px solid #E4DED5;padding-top:12px}
 .nd-mt__guide{background:#F6F3EE;border-radius:4px;padding:12px 14px;font-size:14.5px;color:#4A403B;line-height:1.7}
 .nd-mt__guide b{color:#1F1B19}
 .nd-mt__sum{background:#fff;border:1px solid #4A3F3B;border-radius:6px;padding:22px 24px;display:flex;flex-direction:column;gap:14px}
@@ -91,6 +93,7 @@
   .nd-mt__box,.nd-mt__sum,.nd-mt__card{padding:18px 16px}
   .nd-mt__row,.nd-mt__list2{grid-template-columns:1fr}
   .nd-mt__names{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .nd-mt__opts button{flex-direction:column;gap:2px}
   .nd-mt__eb button,.nd-mt__eb a{flex:1 1 100%}
   .nd-mt__btns a{flex:1 1 100%}
 }
@@ -113,7 +116,7 @@
       </div>
       <div class="nd-mt__menus" id="nd-mt-menus"></div>
       <div class="nd-mt__f">
-        <label for="nd-mt-new">목록에 없는 메뉴<em>메뉴명만 넣어도 됩니다</em></label>
+        <label for="nd-mt-new">목록에 없는 메뉴<em>추가한 뒤 설명 문구를 직접 써 주세요</em></label>
         <div class="nd-mt__add"><input type="text" id="nd-mt-new" maxlength="20" placeholder="예: 수제 떡갈비"><button type="button" id="nd-mt-addbtn">추가</button></div>
       </div>
       <div class="nd-mt__f"><span>외국어 표기</span><div class="nd-mt__chips" id="nd-mt-lang"></div></div>
@@ -130,18 +133,27 @@
   <section class="nd-mt__sec">
     <div class="nd-mt__title"><h2>03 SEND</h2><span>복사해서 보내기</span></div>
     <ul class="nd-mt__list2">
-      <li><b>설명 문구</b>18자 안팎(띄어쓰기 포함)이 가장 보기 좋습니다.</li>
+      <li><b>설명 문구</b>18자 안팎(띄어쓰기 포함)이 가장 보기 좋습니다. 목록에 없는 메뉴는 직접 써 주세요.</li>
       <li><b>세로쓰기 디자인</b>"짧게" 문구를 고르시면 잘 맞습니다.</li>
       <li><b>○○ · 확인 표시</b>원산지 · 재료 문구는 매장 사실과 같은지 확인해 주세요.</li>
     </ul>
     <div class="nd-mt__sum">
+      <div id="nd-mt-who">
+        <div class="nd-mt__f"><span>주문하신 곳</span><div class="nd-mt__chips" id="nd-mt-site"></div></div>
+        <div class="nd-mt__row" style="margin-top:14px">
+          <div class="nd-mt__f"><label for="nd-mt-name">성함 · 상호</label><input type="text" id="nd-mt-name" placeholder="예: 홍길동 / 한우명가"></div>
+          <div class="nd-mt__f"><label for="nd-mt-tel">연락처</label><input type="text" id="nd-mt-tel" inputmode="tel" placeholder="예: 010-1234-5678"></div>
+        </div>
+      </div>
       <div class="nd-mt__row">
-        <div class="nd-mt__f"><label for="nd-mt-order">주문번호 · 주문자<em>선택</em></label><input type="text" id="nd-mt-order" placeholder="예: 2026102312345 / 홍길동"></div>
+        <div class="nd-mt__f"><label for="nd-mt-order" id="nd-mt-order-l">주문번호<em>있으면 적어 주세요</em></label><input type="text" id="nd-mt-order" placeholder="예: 2026102312345"></div>
         <div class="nd-mt__f"><label for="nd-mt-req">추가 요청사항<em>선택</em></label><input type="text" id="nd-mt-req" placeholder="예: 윗줄에 한우 1++ / 로고 넣기"></div>
       </div>
+      <p class="nd-mt__priv">입력하신 내용은 저장되거나 전송되지 않습니다. 복사해서 직접 보내실 때만 전달됩니다.</p>
       <h3>보낼 문구</h3>
       <p class="d">아래 내용이 그대로 복사됩니다. 여기서 바로 고쳐도 됩니다.</p>
       <textarea id="nd-mt-out" spellcheck="false"></textarea>
+      <p class="nd-mt__notice">· 추천 문구는 참고용 예시입니다. 매장의 실제 재료 · 원산지 · 조리 방식과 다를 수 있으니 꼭 확인 후 사용해 주세요.<br>· 제작은 고객님이 시안에서 확인 · 확정하신 문구로 진행됩니다. 시안 확정 후 발견된 문구 오류로 인한 재제작은 비용이 발생합니다.</p>
       <p class="nd-mt__alert nd-mt__hide" id="nd-mt-alert"></p>
       <div class="nd-mt__eb" id="nd-mt-eb">
         <button type="button" class="pri" id="nd-mt-cp">전체 복사</button>
@@ -153,7 +165,7 @@
 
   <div class="nd-mt__cta" id="nd-mt-cta">
     <h2>문구 정하기가 어려우시면</h2>
-    <p>메뉴명만 보내주세요. 디자인에 맞는 문구로 시안을 만들어 드립니다.</p>
+    <p>추천기에 있는 메뉴는 메뉴명만 보내주셔도 추천 문구로 시안을 드립니다.<br>목록에 없는 메뉴는 설명 문구를 함께 보내주세요. 설명이 없으면 메뉴명만 새겨 드립니다.</p>
     <div class="nd-mt__btns">
       <a class="kakao" href="https://pf.kakao.com/_xjHxlnj/chat" target="_blank" rel="noopener">카카오톡 상담</a>
       <a class="board" href="/29">문의 게시판</a>
@@ -184,10 +196,17 @@
     $('nd-mt-cta').className='nd-mt__cta nd-mt__hide';$('nd-mt-kakao').className='kakao nd-mt__hide';
     if(TALK_URL){$('nd-mt-talk').href=TALK_URL;$('nd-mt-talk').className='talk';}
     $('nd-mt-cp').textContent='전체 복사';
+    $('nd-mt-who').className='nd-mt__hide';
+    $('nd-mt-order-l').innerHTML='주문번호 · 주문자<em>선택</em>';$('nd-mt-order').placeholder='예: 2026102312345 / 홍길동';
     var g=document.createElement('p');g.className='nd-mt__guide';
-    g.innerHTML='복사한 내용을 <b>엔도씨 스마트스토어 → 톡톡문의</b> 창에 붙여넣어 보내주세요.<br>메뉴명만 보내주셔도 추천 문구로 시안을 드립니다.';
+    g.innerHTML='복사한 내용을 <b>엔도씨 스마트스토어 → 톡톡문의</b> 창에 붙여넣어 보내주세요.<br>목록에 없는 메뉴는 설명 문구를 직접 써 주세요. 비워 두시면 메뉴명만 새겨 드립니다.';
     $('nd-mt-eb').parentNode.appendChild(g);
   }
+
+  /* 주문하신 곳 */
+  var SITES=['네이버 스마트스토어','엔도씨 홈페이지','라미레이저공방','카카오톡 · 전화','기타'];
+  st.site='';
+  function buildSite(){var b=$('nd-mt-site');b.innerHTML='';for(var i=0;i<SITES.length;i++){(function(s){var x=document.createElement('button');x.type='button';x.textContent=s;x.className=st.site===s?'on':'';x.addEventListener('click',function(){st.site=st.site===s?'':s;buildSite();output();});b.appendChild(x);})(SITES[i]);}}
 
   /* 외국어 */
   var LANGS=[['en','영문'],['ja','영문 + 일문 (일식 메뉴)'],['no','넣지 않음']];
@@ -263,13 +282,13 @@
       var labels=['추천 1','추천 2','짧게 · 세로쓰기용'];
       for(var i=0;i<3;i++){(function(t,lb){
         var b=document.createElement('button');b.type='button';b.setAttribute('data-t',t);
-        b.innerHTML='<b>'+esc(t)+'</b><small>'+lb+' · '+t.length+'자</small>';
+        b.innerHTML='<b>'+esc(t)+'</b><small>'+lb+' · '+t.length+'자(띄어쓰기 포함)</small>';
         b.addEventListener('click',function(){e.desc=t;e.ta.value=t;refresh(e);output();});op.appendChild(b);
       })(e.ref[4][i],labels[i]);}
     }
     var df=document.createElement('div');df.className='nd-mt__f';
     e.ta=document.createElement('textarea');e.ta.rows=2;e.ta.value=e.desc;
-    e.ta.placeholder=e.ref?'추천 문구를 고르거나 직접 써 주세요':'설명을 직접 쓰거나 비워 두세요. 비워 두시면 엔도씨가 추천 문구로 시안을 드립니다.';
+    e.ta.placeholder=e.ref?'추천 문구를 고르거나 직접 써 주세요':'목록에 없는 메뉴는 설명 문구를 직접 써 주세요. 비워 두시면 메뉴명만 새겨 드립니다.';
     e.cnt=document.createElement('p');e.cnt.className='nd-mt__cnt';
     df.appendChild(field('설명 문구',e.ta).firstChild);df.appendChild(e.ta);df.appendChild(e.cnt);c.appendChild(df);
     e.note=document.createElement('p');e.note.className='nd-mt__note nd-mt__hide';c.appendChild(e.note);
@@ -287,7 +306,7 @@
     var bs=e.opBox.querySelectorAll('button');for(var i=0;i<bs.length;i++)bs[i].className=bs[i].getAttribute('data-t')===e.desc?'on':'';
     var n=e.desc.replace(/\n/g,'').length;
     e.cnt.className='nd-mt__cnt'+(n>GOOD?' warn':'');
-    e.cnt.textContent=n?(n+'자'+(n>GOOD?' · 조금 길어요. 시안에서 줄여 드릴 수 있습니다':' · 18자 안팎 권장')):'';
+    e.cnt.textContent=n?(n+'자(띄어쓰기 포함)'+(n>GOOD?' · 조금 길어요. 시안에서 줄여 드릴 수 있습니다':' · 18자 안팎 권장')):'';
     var notes=[];
     if(e.flag)notes.push('매장 사실(재료 · 원산지 · 조리 방식)과 같은지 확인한 뒤 써 주세요.');
     if((e.desc+e.ko).indexOf('○')>-1)notes.push('○○ 부분을 매장 내용으로 채워 주세요.');
@@ -298,28 +317,34 @@
   function output(){
     var n=st.sel.length,L=['[엔도씨 메뉴 네임택 문구]'];
     var od=$('nd-mt-order').value.replace(/^\s+|\s+$/g,''),rq=$('nd-mt-req').value.replace(/^\s+|\s+$/g,'');
-    L.push('주문번호 · 주문자 : '+(od||''));
+    if(st.store){L.push('주문번호 · 주문자 : '+(od||''));}
+    else{
+      var nm=$('nd-mt-name').value.replace(/^\s+|\s+$/g,''),tel=$('nd-mt-tel').value.replace(/^\s+|\s+$/g,'');
+      L.push('주문하신 곳 : '+(st.site||''));L.push('성함 · 상호 : '+nm);L.push('연락처 : '+tel);
+      if(od)L.push('주문번호 : '+od);
+    }
     L.push('외국어 : '+(st.lang==='en'?'영문':st.lang==='ja'?'영문 + 일문(일식 메뉴)':'없음')+' / 총 '+n+'종 '+total()+'개');
     if(rq)L.push('추가 요청 : '+rq);
     for(var i=0;i<n;i++){var e=st.sel[i];
       L.push('');L.push((i+1)+'. '+(e.ko||'메뉴명')+(e.qty>1?'  × '+e.qty:''));
       if(st.lang!=='no'&&e.en)L.push('   영문 : '+e.en);
       if(st.lang==='ja'&&e.ja)L.push('   일문 : '+e.ja);
-      L.push('   설명 : '+(e.desc?e.desc.replace(/\s*\n\s*/g,' '):'(추천 문구로 부탁드립니다)'));
+      L.push('   설명 : '+(e.desc?e.desc.replace(/\s*\n\s*/g,' '):(e.ref?'(추천 1 문구로 부탁드립니다)':'(설명 없음 · 메뉴명만)')));
     }
     if(!n)L.push('','(메뉴를 골라 주세요)');
     $('nd-mt-out').value=L.join('\n');st.warned=false;$('nd-mt-alert').className='nd-mt__alert nd-mt__hide';
   }
-  $('nd-mt-order').addEventListener('input',output);$('nd-mt-req').addEventListener('input',output);
+  $('nd-mt-order').addEventListener('input',output);$('nd-mt-name').addEventListener('input',output);$('nd-mt-tel').addEventListener('input',output);$('nd-mt-req').addEventListener('input',output);
   $('nd-mt-cp').addEventListener('click',function(){
     var t=$('nd-mt-out').value,btn=this,label=btn.textContent;
+    if(!st.store&&(!$('nd-mt-name').value.replace(/\s/g,'')||!$('nd-mt-tel').value.replace(/\s/g,''))&&!st.warned){st.warned=true;var a0=$('nd-mt-alert');a0.className='nd-mt__alert';a0.textContent='성함과 연락처를 적어 주셔야 주문을 찾을 수 있습니다. 그대로 복사하려면 한 번 더 눌러 주세요.';return;}
     if(t.indexOf('○')>-1&&!st.warned){st.warned=true;var a=$('nd-mt-alert');a.className='nd-mt__alert';a.textContent='○○ 부분이 남아 있습니다. 채운 뒤 복사하시거나, 그대로 보내려면 한 번 더 눌러 주세요.';return;}
     function done(){btn.textContent='복사되었습니다';setTimeout(function(){btn.textContent=label;},1800);}
     function fb(){var x=document.createElement('textarea');x.value=t;x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();try{document.execCommand('copy');done();}catch(err){}document.body.removeChild(x);}
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done,fb);else fb();
   });
 
-  function start(){buildLang();buildCats();buildMenus();afterChange();}
+  function start(){buildSite();buildLang();buildCats();buildMenus();afterChange();}
   if(DATA_URL&&window.fetch){fetch(DATA_URL).then(function(r){return r.json();}).then(function(d){if(d&&d.items&&d.items.length){CATS=d.cats||CATS;ITEMS=d.items;}start();},start);}
   else start();
 })();
