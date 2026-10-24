@@ -2,7 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>메뉴 네임택 문구 추천기 | 엔도씨 NDOC</title>
 <meta name="description" content="메뉴를 고르면 네임택 설명 문구가 자동으로 추천됩니다. 소고기 · 돼지고기 · 회 · 뷔페 · 베이커리 208개 메뉴.">
-<meta property="og:title" content="메뉴 네임택 문구 추천기 | 엔도씨">
+<meta property="og:title" content="메뉴 네임택 문구 추천기">
 <meta property="og:description" content="메뉴만 고르면 설명 문구가 자동으로 채워집니다.">
 <style>body{margin:0;background:#F6F3EE}</style></head><body>
 <!-- ▼ NDOC 메뉴 네임택 문구 추천 ================================ -->
@@ -189,6 +189,10 @@
 
   function $(id){return document.getElementById(id);}
   function esc(x){return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  /* 브랜드 : 주소 끝에 ?b=ramy 를 붙이면 라미레이저공방으로 바뀝니다 */
+  var RAMY=/[?&]b=ramy/i.test(location.search);
+  var BR=RAMY?{name:'라미레이저공방',short:'라미'}:{name:'엔도씨',short:'엔도씨'};
+  if(RAMY&&document.title)document.title=document.title.replace(/엔도씨 NDOC|엔도씨/g,'라미레이저공방');
   var st={lang:'en',sel:[],warned:false,store:STORE_ONLY||/[?&]ch=store/i.test(location.search)};
   var seq=0;
 
@@ -199,7 +203,7 @@
     $('nd-mt-who').className='nd-mt__hide';
     $('nd-mt-order-l').innerHTML='주문번호 · 주문자<em>선택</em>';$('nd-mt-order').placeholder='예: 2026102312345 / 홍길동';
     var g=document.createElement('p');g.className='nd-mt__guide';
-    g.innerHTML='복사한 내용을 <b>엔도씨 스마트스토어 → 톡톡문의</b> 창에 붙여넣어 보내주세요.<br>목록에 없는 메뉴는 설명 문구를 직접 써 주세요. 비워 두시면 메뉴명만 새겨 드립니다.';
+    g.innerHTML='복사한 내용을 <b>'+BR.name+' 스마트스토어 → 톡톡문의</b> 창에 붙여넣어 보내주세요.<br>목록에 없는 메뉴는 설명 문구를 직접 써 주세요. 비워 두시면 메뉴명만 새겨 드립니다.';
     $('nd-mt-eb').parentNode.appendChild(g);
   }
 
@@ -315,7 +319,7 @@
 
   /* 보낼 문구 */
   function output(){
-    var n=st.sel.length,L=['[엔도씨 메뉴 네임택 문구]'];
+    var n=st.sel.length,L=['['+BR.name+' 메뉴 네임택 문구]'];
     var od=$('nd-mt-order').value.replace(/^\s+|\s+$/g,''),rq=$('nd-mt-req').value.replace(/^\s+|\s+$/g,'');
     if(st.store){L.push('주문번호 · 주문자 : '+(od||''));}
     else{
